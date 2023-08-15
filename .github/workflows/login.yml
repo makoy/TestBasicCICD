@@ -1,0 +1,21 @@
+name: Manual Azure Login
+
+on:
+  workflow_dispatch:  # This event allows manual triggering
+
+jobs:
+  azure-login:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.PLAYDEV_AZURE_CREDENTIALS }}
+
+      - name: Run Azure CLI Command
+        run: |
+          # Place your Azure CLI command here
+          az account show
